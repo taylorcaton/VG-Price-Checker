@@ -10,4 +10,5 @@ node app.js TEXT_FILE CONSOLE_NUM
 - TEXT_FILE: Location of text file (include .txt extension)
   - list of games separated by a new line
 - CONSOLE_NUM: Default `13` (NES)
+  - 13 - NES
   - 17 - SNES

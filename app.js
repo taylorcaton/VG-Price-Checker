@@ -61,21 +61,20 @@ lr.on('end', function () {
 function getPrice(game, cb) {
 
   const url = buildGameURL(game, process.argv[3]);
-  https.get(url, (resp) => { 
+  https.get(url, (resp) => {
     let data = '';
 
-    // A chunk of data has been recieved.         
+    // A chunk of data has been recieved.
     resp.on('data', (chunk) => {
       data += chunk;
     });
 
     // The whole response has been received. Print out the result.
-         
-    resp.on('end', () => {  
-      cb(JSON.parse(data)); 
+    resp.on('end', () => {
+      cb(JSON.parse(data));
     });
 
-  }).on('error', (err) => { 
+  }).on('error', (err) => {
     console.log('Error: ' + err.message);
   });
 }
