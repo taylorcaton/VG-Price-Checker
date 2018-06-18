@@ -16,8 +16,8 @@ node app.js TEXT_FILE CONSOLE_NUM
 ### TODO
 
 - [x] NES and SNES Support
-- [] More Console Support
-- [] Natural language instead of console number
-- [] Google Sheets integration
-- [] Display Totals
-- [] Save Totals to compare over time
+- [ ] More Console Support
+- [ ] Natural language instead of console number
+- [ ] Google Sheets integration
+- [ ] Display Totals
+- [ ] Save Totals to compare over time
