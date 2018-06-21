@@ -20,4 +20,5 @@ node app.js TEXT_FILE CONSOLE_NUM
 - [ ] Natural language instead of console number
 - [ ] Google Sheets integration
 - [ ] Display Totals
+- [ ] Display Totals over time
 - [ ] Save Totals to compare over time
