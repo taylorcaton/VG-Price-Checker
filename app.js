@@ -11,9 +11,11 @@ const querystring = require('querystring');
 const Json2csvParser = require('json2csv').Parser;
 var fs = require('fs');
 var FuzzyMatching = require('fuzzy-matching');
+const storage = require('node-persist');
 
 let gamesObj = [];
-
+let valueTotal = 0;
+let previousPrices = getPreviousPrices();
 
 lr.on('error', function (err) {
   // 'err' contains error object
@@ -48,6 +50,9 @@ lr.on('line', function (line) {
       price: priceObj[index].prices[0]
     });
 
+    // Add price to total
+    valueTotal += Number(priceObj[index].prices[0]);
+
     // Read the next line
     lr.resume();
   });
@@ -55,6 +60,7 @@ lr.on('line', function (line) {
 
 lr.on('end', function () {
   console.log('All lines are read, file is closed now.');
+  saveStorage();
   jsonToCsv();
 });
 
@@ -105,4 +111,34 @@ function jsonToCsv() {
 function fuzzyMatch(game, list) {
   var fm = new FuzzyMatching(list);
   return list.indexOf(fm.get(game).value);
+}
+
+async function getPreviousPrices() {
+  await storage.init({
+    dir: './storage'
+  });
+
+  let arr = await storage.getItem(`previousPricesArray${process.argv[3]}`);
+  if(arr){
+    return arr;
+  }else{
+    return [];
+  }
+}
+
+async function saveStorage() {
+  let today = new Date();
+  previousPrices.then(arr => {
+    arr.push({
+      date: today.toLocaleDateString("en-US"),
+      total: Math.round(valueTotal)
+    });
+    console.log(arr);
+    storeIt(arr);
+  });
+}
+
+async function storeIt(arr) {
+  await storage.setItem(`previousPricesArray${process.argv[3]}`, arr);
+  console.log('Values Stored:', arr);
 }

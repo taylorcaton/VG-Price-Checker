@@ -1,0 +1,27 @@
+{
+  "name": "price-charting-app",
+  "version": "1.0.0",
+  "description": "This takes a list of games (text file) and creates a csv with all of their current prices.",
+  "main": "app.js",
+  "dependencies": {
+    "buffered-reader": "^1.0.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "fuzzy-matching": "^0.4.3",
+    "json2csv": "^4.1.3",
+    "line-by-line": "^0.1.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taylorcaton/VG-Price-Checker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taylorcaton/VG-Price-Checker/issues"
+  },
+  "homepage": "https://github.com/taylorcaton/VG-Price-Checker#readme"
+}
