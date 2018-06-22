@@ -130,7 +130,7 @@ async function saveStorage() {
   let today = new Date();
   previousPrices.then(arr => {
     arr.push({
-      date: today.toLocaleDateString("en-US"),
+      date: today.toLocaleDateString('en-US'),
       total: Math.round(valueTotal)
     });
     console.log(arr);
