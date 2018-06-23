@@ -8,10 +8,9 @@ const LineByLineReader = require('line-by-line'),
   lr = new LineByLineReader(process.argv[2]);
 const https = require('https');
 const querystring = require('querystring');
-const Json2csvParser = require('json2csv').Parser;
-var fs = require('fs');
 var FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
+const csv = require('./csv.js');
 
 let gamesObj = [];
 let valueTotal = 0;
@@ -61,7 +60,7 @@ lr.on('line', function (line) {
 lr.on('end', function () {
   console.log('All lines are read, file is closed now.');
   saveStorage();
-  jsonToCsv();
+  csv(gamesObj);
 });
 
 function getPrice(game, cb) {
@@ -90,22 +89,6 @@ function buildGameURL(game, consoleNumber = 17) {
     q: game
   });
   return `https://www.pricecharting.com/search-products?type=cart&consoles=${consoleNumber}&${query}`;
-}
-
-function jsonToCsv() {
-  const fields = ['game', 'price'];
-  const json2csvParser = new Json2csvParser({
-    fields
-  });
-  const csv = json2csvParser.parse(gamesObj);
-
-  fs.writeFile('gameList.csv', csv, 'utf8', function (err) {
-    if (err) {
-      console.log('Some error occured - file either not saved or corrupted file saved.', err);
-    } else {
-      console.log('It\'s saved!');
-    }
-  });
 }
 
 function fuzzyMatch(game, list) {
@@ -140,5 +123,4 @@ async function saveStorage() {
 
 async function storeIt(arr) {
   await storage.setItem(`previousPricesArray${process.argv[3]}`, arr);
-  console.log('Values Stored:', arr);
 }
