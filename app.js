@@ -4,13 +4,14 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 
+const CONSOLE_NUMBER = process.argv[3] ? process.argv[3] : 17;
+const textFileToRead = process.argv[2];
 const LineByLineReader = require('line-by-line'),
-  lr = new LineByLineReader(process.argv[2]);
-const https = require('https');
-const querystring = require('querystring');
+  lr = new LineByLineReader(textFileToRead);
 var FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
 const csv = require('./csv.js');
+const getPrice = require('./checker.js');
 
 let gamesObj = [];
 let valueTotal = 0;
@@ -22,23 +23,23 @@ lr.on('error', function (err) {
 });
 
 // Reads each line
-lr.on('line', function (line) {
+lr.on('line', function (gameName) {
   lr.pause(); //Pause until data comes back.
 
-  getPrice(line, (priceObj) => {
+  getPrice(gameName, (priceObj) => {
 
     let index = 0;
 
     // Is there more than one match?
     if (priceObj.length > 1) {
       // Get the index of the closest match
-      index = fuzzyMatch(line, priceObj.map(a => a.label));
+      index = fuzzyMatch(gameName, priceObj.map(a => a.label));
 
       // Print findings
-      console.log('Multiple Matches Found!');
-      console.log(priceObj.map(a => a.label));
-      console.log(`Search value: ${line}`);
-      console.log(`Match found at index #${index}`);
+      console.log(`Multiple Matches Found for ${gameName}`);
+      // console.log(priceObj.map(a => a.label));
+      console.log(`Search value: ${gameName}`);
+      // console.log(`Match found at index #${index}`);
       console.log(`Using closest match: ${priceObj[index].label}`);
       console.log('');
     }
@@ -63,34 +64,6 @@ lr.on('end', function () {
   csv(gamesObj);
 });
 
-function getPrice(game, cb) {
-
-  const url = buildGameURL(game, process.argv[3]);
-  https.get(url, (resp) => {
-    let data = '';
-
-    // A chunk of data has been recieved.
-    resp.on('data', (chunk) => {
-      data += chunk;
-    });
-
-    // The whole response has been received. Print out the result.
-    resp.on('end', () => {
-      cb(JSON.parse(data));
-    });
-
-  }).on('error', (err) => {
-    console.log('Error: ' + err.message);
-  });
-}
-
-function buildGameURL(game, consoleNumber = 17) {
-  let query = querystring.stringify({
-    q: game
-  });
-  return `https://www.pricecharting.com/search-products?type=cart&consoles=${consoleNumber}&${query}`;
-}
-
 function fuzzyMatch(game, list) {
   var fm = new FuzzyMatching(list);
   return list.indexOf(fm.get(game).value);
@@ -101,7 +74,7 @@ async function getPreviousPrices() {
     dir: './storage'
   });
 
-  let arr = await storage.getItem(`previousPricesArray${process.argv[3]}`);
+  let arr = await storage.getItem(`previousPricesArray${CONSOLE_NUMBER}`);
   if(arr){
     return arr;
   }else{
@@ -111,16 +84,16 @@ async function getPreviousPrices() {
 
 async function saveStorage() {
   let today = new Date();
+  let total = Number.parseFloat(valueTotal).toFixed(2);
   previousPrices.then(arr => {
     arr.push({
       date: today.toLocaleDateString('en-US'),
-      total: Math.round(valueTotal)
+      total: total
     });
-    console.log(arr);
     storeIt(arr);
   });
 }
 
 async function storeIt(arr) {
-  await storage.setItem(`previousPricesArray${process.argv[3]}`, arr);
+  await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
 }
