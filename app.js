@@ -4,14 +4,16 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 
-const CONSOLE_NUMBER = process.argv[3] ? process.argv[3] : 17;
-const textFileToRead = process.argv[2];
-const LineByLineReader = require('line-by-line'),
-  lr = new LineByLineReader(textFileToRead);
 var FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
 const csv = require('./csv.js');
 const getPrice = require('./checker.js');
+const systems = require('./systems.js');
+console.log(systems);
+const CONSOLE_NUMBER = systems(process.argv[3]);
+const textFileToRead = process.argv[2];
+const LineByLineReader = require('line-by-line'),
+  lr = new LineByLineReader(textFileToRead);
 
 let gamesObj = [];
 let valueTotal = 0;
@@ -19,14 +21,14 @@ let previousPrices = getPreviousPrices();
 
 lr.on('error', function (err) {
   // 'err' contains error object
-  console.log(err);
+  console.log('Line Reader Error', err);
 });
 
 // Reads each line
 lr.on('line', function (gameName) {
   lr.pause(); //Pause until data comes back.
 
-  getPrice(gameName, (priceObj) => {
+  getPrice(gameName, CONSOLE_NUMBER, (priceObj) => {
 
     let index = 0;
 

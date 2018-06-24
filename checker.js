@@ -2,9 +2,9 @@
 const https = require('https');
 const querystring = require('querystring');
 
-module.exports = (game, cb) => {
+module.exports = (game, CONSOLE_NUMBER, cb) => {
 
-  const url = buildGameURL(game, process.argv[3]);
+  const url = buildGameURL(game, CONSOLE_NUMBER);
   https.get(url, (resp) => {
     let data = '';
 
@@ -23,9 +23,10 @@ module.exports = (game, cb) => {
   });
 };
 
-function buildGameURL(game, consoleNumber = 17) {
+function buildGameURL(game, consoleNumber) {
   let query = querystring.stringify({
     q: game
   });
-  return `https://www.pricecharting.com/search-products?type=cart&consoles=${consoleNumber}&${query}`;
+  let url = `https://www.pricecharting.com/search-products?type=cart&consoles=${consoleNumber}&${query}`;
+  return url;
 }

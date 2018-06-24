@@ -31,7 +31,7 @@ Duck Tales
 Excitebike
 Felix the Cat
 Golf
-Guardian Legend 
+Guardian Legend
 Gyromite [5-Screw]
 Gyruss
 Hogan's Alley
@@ -62,7 +62,7 @@ Metroid
 Mike Tyson's Punch Out
 Pinball [5-Screw]
 Pinball Quest
-Pro Wrestling 
+Pro Wrestling
 RC Pro-AM
 Rad Racer
 RBI Baseball
