@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "buffered-reader": "^1.0.1",
+    "console.table": "^0.10.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "fuzzy-matching": "^0.4.3",
     "json2csv": "^4.1.3",

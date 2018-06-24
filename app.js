@@ -9,7 +9,7 @@ const storage = require('node-persist');
 const csv = require('./csv.js');
 const getPrice = require('./checker.js');
 const systems = require('./systems.js');
-console.log(systems);
+const cTable = require('console.table');
 const CONSOLE_NUMBER = systems(process.argv[3]);
 const textFileToRead = process.argv[2];
 const LineByLineReader = require('line-by-line'),
@@ -38,9 +38,8 @@ lr.on('line', function (gameName) {
       index = fuzzyMatch(gameName, priceObj.map(a => a.label));
 
       // Print findings
-      console.log(`Multiple Matches Found for ${gameName}`);
+      console.log(`Multiple Matches Found for search value: ${gameName}`);
       // console.log(priceObj.map(a => a.label));
-      console.log(`Search value: ${gameName}`);
       // console.log(`Match found at index #${index}`);
       console.log(`Using closest match: ${priceObj[index].label}`);
       console.log('');
@@ -98,4 +97,8 @@ async function saveStorage() {
 
 async function storeIt(arr) {
   await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
+
+  // Display Reults
+  console.log(`Totals History for the ${process.argv[3]}`);
+  console.table(arr);
 }

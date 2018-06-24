@@ -24,6 +24,7 @@ node app.js TEXT_FILE CONSOLE_NAME
 - [x] Display Totals
 - [x] Display Totals over time
 - [x] Save Totals to compare over time
-- [ ] More Console Support
 - [x] Natural language instead of console number
+- [ ] Pretty Print Totals
+- [ ] More Console Support
 - [ ] Google Sheets integration
