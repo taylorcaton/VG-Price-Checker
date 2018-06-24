@@ -25,6 +25,7 @@ node app.js TEXT_FILE CONSOLE_NAME
 - [x] Display Totals over time
 - [x] Save Totals to compare over time
 - [x] Natural language instead of console number
-- [ ] Pretty Print Totals
+- [x] Pretty Print Totals
+- [ ] Show which games have lost or gained value
 - [ ] More Console Support
 - [ ] Google Sheets integration
