@@ -18,6 +18,10 @@ node app.js TEXT_FILE CONSOLE_NAME
 
 - GB, GBA, GBC, GameCube, NES, 3DS, N64, NDS, Switch, SNES, Virtual_Boy, Wii, WiiU
 
+### Sega
+
+- 32X, SCD, Dreamcast, GameGear, Genesis, SMS, Saturn
+
 ### TODO
 
 - [x] NES and SNES Support
