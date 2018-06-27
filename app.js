@@ -77,9 +77,9 @@ async function getPreviousPrices() {
   });
 
   let arr = await storage.getItem(`previousPricesArray${CONSOLE_NUMBER}`);
-  if(arr){
+  if (arr) {
     return arr;
-  }else{
+  } else {
     return [];
   }
 }
@@ -104,25 +104,25 @@ async function storeIt(arr) {
   console.table(arr);
 }
 
-async function compareIndividualPrices(){
+async function compareIndividualPrices() {
 
   // Get stored individual prices
   let oldPrices = await storage.getItem(`oldPrices${CONSOLE_NUMBER}`);
   let priceChanges = [];
 
   // If there are no individual prices, create the entry
-  if(!oldPrices){
+  if (!oldPrices) {
     await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, gamesObj);
     return;
   }
 
   // Check to see if there are any price differences between current and stored games
-  gamesObj.forEach( (game, index) => {
-    oldPrices.every( (oldGame, oldIndex) => {
-      if(game.name === oldGame.name){
+  gamesObj.forEach((game, index) => {
+    oldPrices.every((oldGame, oldIndex) => {
+      if (game.name === oldGame.name) {
 
         // If the game price is the same, 'break' out of the loop
-        if(game.price === oldGame.price){
+        if (game.price === oldGame.price) {
           return false;
         }
 
@@ -141,9 +141,9 @@ async function compareIndividualPrices(){
 
   // Update the database
   await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, oldPrices);
-  if(priceChanges.length){
+  if (priceChanges.length) {
     console.table(priceChanges);
-  }else{
+  } else {
     console.log('No price changes since this tool was last run');
   }
 
