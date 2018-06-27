@@ -2,7 +2,7 @@
 const https = require('https');
 const querystring = require('querystring');
 
-module.exports = (game, CONSOLE_NUMBER, cb) => {
+module.exports.getPrice = (game, CONSOLE_NUMBER, cb) => {
 
   const url = buildGameURL(game, CONSOLE_NUMBER);
   https.get(url, (resp) => {

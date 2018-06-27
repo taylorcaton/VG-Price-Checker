@@ -7,7 +7,7 @@ if (process.argv.length < 3) {
 var FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
 const csv = require('./csv.js');
-const getPrice = require('./checker.js');
+const checker = require('./checker.js');
 const systems = require('./systems.js');
 const cTable = require('console.table');
 const CONSOLE_NUMBER = systems(process.argv[3]);
@@ -28,7 +28,7 @@ lr.on('error', function (err) {
 lr.on('line', function (gameName) {
   lr.pause(); //Pause until data comes back.
 
-  getPrice(gameName, CONSOLE_NUMBER, (priceObj) => {
+  checker.getPrice(gameName, CONSOLE_NUMBER, (priceObj) => {
 
     let index = 0;
 
@@ -47,7 +47,7 @@ lr.on('line', function (gameName) {
 
     // Add game name and price to array of objects
     gamesObj.push({
-      game: priceObj[index].label,
+      name: priceObj[index].label,
       price: priceObj[index].prices[0]
     });
 
@@ -62,6 +62,7 @@ lr.on('line', function (gameName) {
 lr.on('end', function () {
   console.log('All lines are read, file is closed now.');
   saveStorage();
+  compareIndividualPrices();
   csv(gamesObj);
 });
 
@@ -101,4 +102,49 @@ async function storeIt(arr) {
   // Display Reults
   console.log(`Totals History for the ${process.argv[3]}`);
   console.table(arr);
+}
+
+async function compareIndividualPrices(){
+
+  // Get stored individual prices
+  let oldPrices = await storage.getItem(`oldPrices${CONSOLE_NUMBER}`);
+  let priceChanges = [];
+
+  // If there are no individual prices, create the entry
+  if(!oldPrices){
+    await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, gamesObj);
+    return;
+  }
+
+  // Check to see if there are any price differences between current and stored games
+  gamesObj.forEach( (game, index) => {
+    oldPrices.every( (oldGame, oldIndex) => {
+      if(game.name === oldGame.name){
+
+        // If the game price is the same, 'break' out of the loop
+        if(game.price === oldGame.price){
+          return false;
+        }
+
+        // The price has changed, keep track in a separate array and update database
+        oldPrices[oldIndex] = gamesObj[index];
+        priceChanges.push({
+          name: game.name,
+          oldPrice: oldGame.price,
+          newPrice: game.price,
+          change: Number.parseFloat(game.price - oldGame.price).toFixed(2),
+          percentChange: `%${Math.round( this.change / oldGame.price * 100 )}`
+        });
+      }
+    });
+  });
+
+  // Update the database
+  await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, oldPrices);
+  if(priceChanges.length){
+    console.table(priceChanges);
+  }else{
+    console.log('No price changes since this tool was last run');
+  }
+
 }
