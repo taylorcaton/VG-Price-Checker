@@ -9,11 +9,18 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "fuzzy-matching": "^0.4.3",
     "json2csv": "^4.1.3",
-    "line-by-line": "^0.1.6"
+    "line-by-line": "^0.1.6",
+    "node-fetch": "^2.1.2"
   },
-  "devDependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",

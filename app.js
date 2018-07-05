@@ -28,7 +28,7 @@ lr.on('error', function (err) {
 lr.on('line', function (gameName) {
   lr.pause(); //Pause until data comes back.
 
-  checker.getPrice(gameName, CONSOLE_NUMBER, (priceObj) => {
+  checker.getPrice(gameName, CONSOLE_NUMBER).then( priceObj => {
 
     let index = 0;
 
