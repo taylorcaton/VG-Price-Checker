@@ -3,15 +3,15 @@ var FuzzyMatching = require('fuzzy-matching');
 
 class Price_Checker {
 
-  constructor(gameList, CONSOLE_NUMBER){
+  constructor(gameList, CONSOLE_NUMBER) {
     this.gameList = gameList;
     this.CONSOLE_NUMBER = CONSOLE_NUMBER;
     this.pricedList = [];
     this.valueTotal = 0;
   }
 
-  async buildPriceList(){
-    for(const game of this.gameList) {
+  async buildPriceList() {
+    for (const game of this.gameList) {
       let priceResults = await this.getPriceOfSingleGame(game);
       this.pricedList.push({
         // Game Object
@@ -24,7 +24,7 @@ class Price_Checker {
     return this.pricedList;
   }
 
-  async getPriceOfSingleGame(gameName){
+  async getPriceOfSingleGame(gameName) {
     let priceResults = await checker.getPrice(gameName, this.CONSOLE_NUMBER);
     let index = 0;
 

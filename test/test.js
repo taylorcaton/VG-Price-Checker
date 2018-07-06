@@ -6,7 +6,7 @@ const consoleNumber = 17;
 
 describe('Checker.js module', () => {
   let url = Server_Checker.buildGameURL(sampleGames[0], consoleNumber);
-  describe('"buildGameURL"', ()=> {
+  describe('"buildGameURL"', () => {
     it('should export a function', () => {
       expect(Server_Checker.buildGameURL).to.be.a('function');
     });
@@ -14,12 +14,12 @@ describe('Checker.js module', () => {
       expect(url).to.be.a('string');
     });
   });
-  describe('"getPrice"', ()=> {
+  describe('"getPrice"', () => {
     it('should export a function', () => {
       expect(Server_Checker.getPrice).to.be.a('function');
     });
     it('should return an array', () => {
-      Server_Checker.getPrice(url).then( data => {
+      Server_Checker.getPrice(url).then(data => {
         expect(data).to.be.a('array');
       });
     });
