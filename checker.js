@@ -3,12 +3,8 @@ const querystring = require('querystring');
 const fetch = require('node-fetch');
 
 async function getPrice(game, CONSOLE_NUMBER) {
-  return getData( buildGameURL(game, CONSOLE_NUMBER) );
-}
-
-async function getData(url) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(buildGameURL(game, CONSOLE_NUMBER));
     const json = await response.json();
     return json;
   } catch (error) {
@@ -25,5 +21,4 @@ function buildGameURL(game, consoleNumber) {
 }
 
 module.exports.buildGameURL = buildGameURL;
-module.exports.getData = getData;
 module.exports.getPrice = getPrice;

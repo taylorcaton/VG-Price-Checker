@@ -14,12 +14,12 @@ describe('Checker.js module', () => {
       expect(url).to.be.a('string');
     });
   });
-  describe('"getData"', ()=> {
+  describe('"getPrice"', ()=> {
     it('should export a function', () => {
-      expect(Server_Checker.getData).to.be.a('function');
+      expect(Server_Checker.getPrice).to.be.a('function');
     });
     it('should return an array', () => {
-      Server_Checker.getData(url).then( data => {
+      Server_Checker.getPrice(url).then( data => {
         expect(data).to.be.a('array');
       });
     });
@@ -43,7 +43,6 @@ describe('Price Checker module', () => {
       pc.buildPriceList().then(arr => {
         expect(arr).to.be.a('array');
       });
-
     });
   });
 
