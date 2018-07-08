@@ -24,7 +24,7 @@ class Price_Checker {
     return this.pricedList;
   }
 
-  async getPriceOfSingleGame(gameName) {
+  async getPriceOfSingleGame(gameName, verbose) {
     let priceResults = await checker.getPrice(gameName, this.CONSOLE_NUMBER);
     let index = 0;
 
@@ -33,10 +33,8 @@ class Price_Checker {
       // Get the index of the closest match
       index = this.fuzzyMatch(gameName, priceResults.map(a => a.label));
 
-      // Print findings
-      console.log(`Multiple Matches Found for search value: ${gameName}`);
-      console.log(`Using closest match: ${priceResults[index].label}`);
-      console.log('');
+      // Print Findings
+      if(verbose) this.printFindings(gameName, priceResults[index].label);
     }
     return priceResults[index];
   }
@@ -44,6 +42,12 @@ class Price_Checker {
   fuzzyMatch(game, list) {
     var fm = new FuzzyMatching(list);
     return list.indexOf(fm.get(game).value);
+  }
+
+  printFindings(originalGameName, closestMatch){
+    console.log(`Multiple Matches Found for search value: ${originalGameName}`);
+    console.log(`Using closest match: ${closestMatch}`);
+    console.log('');
   }
 }
 
