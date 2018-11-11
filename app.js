@@ -47,17 +47,27 @@ lr.on('line', function (gameName) {
     }
 
     // Add game name and price to array of objects
-    gamesObj.push({
-      name: priceObj[index].label,
-      price: priceObj[index].prices[0]
-    });
+    if(priceObj[index] != undefined){
+      gamesObj.push({
+        name: priceObj[index].label,
+        price: priceObj[index].prices[0]
+      });
 
-    // Add price to total
-    valueTotal += Number(priceObj[index].prices[0]);
+      // Add price to total
+      valueTotal += Number(priceObj[index].prices[0]);
+
+    } else {
+      console.error(`Could not not find anything matching ${gameName}`)
+    }
+    
+    
+
+    
 
     // Read the next line
     lr.resume();
-  });
+  })
+  .catch(err => console.log(err));
 });
 
 lr.on('end', function () {
