@@ -10,6 +10,7 @@ const csv = require('./csv.js');
 const checker = require('./checker.js');
 const systems = require('./systems.js');
 const cTable = require('console.table');
+const CONSOLE_NAME = process.argv[3] ? process.argv[3] : 'NES';
 const CONSOLE_NUMBER = systems(process.argv[3]);
 const textFileToRead = process.argv[2];
 const LineByLineReader = require('line-by-line'),
@@ -100,7 +101,7 @@ async function storeIt(arr) {
   await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
 
   // Display Reults
-  console.log(`Totals History for the ${process.argv[3]}`);
+  console.log(`Totals History for the ${CONSOLE_NAME}`);
   console.table(arr);
 }
 
