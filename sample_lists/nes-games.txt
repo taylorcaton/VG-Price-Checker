@@ -60,9 +60,11 @@ MegaMan 6
 Metal Gear
 Metroid
 Mike Tyson's Punch Out
+Ninja Gaiden 2
 Pinball [5-Screw]
 Pinball Quest
-Pro Wrestling
+Pinbot 
+Pro Wrestling 
 RC Pro-AM
 Rad Racer
 RBI Baseball
@@ -74,7 +76,6 @@ Slalom [5-Screw]
 Soccer [5-Screw]
 Solomon's Key
 Stack Up
-Super Dodgeball
 Super Mario Bros [5-Screw]
 Super Mario Brothers and Duck Hunt
 Tecmo Super Bowl
@@ -85,6 +86,7 @@ Tetris
 The Three Stooges
 Toobin
 Track and Field 2
+Urban Champion [5-Screw]
 Volleyball [5-Screw]
 Wario's Woods
 Whomp 'Em
