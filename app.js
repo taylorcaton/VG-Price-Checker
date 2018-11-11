@@ -64,7 +64,7 @@ lr.on('end', function () {
   console.log('All lines are read, file is closed now.');
   saveStorage();
   compareIndividualPrices();
-  csv(gamesObj);
+  csv(gamesObj, CONSOLE_NAME);
 });
 
 function fuzzyMatch(game, list) {
