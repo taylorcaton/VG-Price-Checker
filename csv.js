@@ -2,7 +2,7 @@ const Json2csvParser = require('json2csv').Parser;
 var fs = require('fs');
 
 module.exports = function (gamesObj) {
-  const fields = ['game', 'price'];
+  const fields = ['name', 'price'];
   const json2csvParser = new Json2csvParser({
     fields
   });
@@ -12,7 +12,7 @@ module.exports = function (gamesObj) {
     if (err) {
       console.log('Some error occured - file either not saved or corrupted file saved.', err);
     } else {
-      console.log('It\'s saved!');
+      console.log('CSV saved to gameList.csv!');
     }
   });
 };
