@@ -1,6 +1,6 @@
 # VG-Price-Checker
 
-This takes a list of games (text file) and creates a csv with all of their current prices.
+Takes a list of games from a text file and creates a csv with all of their current prices.
 
 ```bash
 npm install
@@ -31,5 +31,5 @@ node app.js TEXT_FILE CONSOLE_NAME
 - [x] Natural language instead of console number
 - [x] Pretty Print Totals
 - [x] Show which games have lost or gained value
-- [ ] More Console Support
+- [x] More Console Support
 - [ ] Google Sheets integration
