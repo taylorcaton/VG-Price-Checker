@@ -6,7 +6,6 @@ function getConsoleNumber(consoleName) {
       match = obj.code;
     }
   });
-
   return match;
 }
 
