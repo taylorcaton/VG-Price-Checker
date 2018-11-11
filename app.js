@@ -9,9 +9,11 @@ const storage = require('node-persist');
 const csv = require('./csv.js');
 const checker = require('./checker.js');
 const systems = require('./systems.js');
+console.log(systems);
 const cTable = require('console.table');
 const CONSOLE_NAME = process.argv[3] ? process.argv[3] : 'NES';
-const CONSOLE_NUMBER = systems(process.argv[3]);
+const CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
+console.log(CONSOLE_NUMBER);
 const textFileToRead = process.argv[2];
 const LineByLineReader = require('line-by-line'),
   lr = new LineByLineReader(textFileToRead);
@@ -19,6 +21,9 @@ const LineByLineReader = require('line-by-line'),
 let gamesObj = [];
 let valueTotal = 0;
 let previousPrices = getPreviousPrices();
+
+console.log(2);
+console.log(`Price search for Console Number ${CONSOLE_NUMBER}`);
 
 lr.on('error', function (err) {
   // 'err' contains error object

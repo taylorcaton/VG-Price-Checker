@@ -1,14 +1,15 @@
-module.exports = (consoleName) => {
 
-  if (consoleName) {
-    console_codes.forEach(obj => {
-      if (obj.name.toUpperCase() === consoleName.toUpperCase()) {
-        return obj.code;
-      }
-    });
-  }
-  return 17; // NES Default
-};
+function getConsoleNumber(consoleName) {
+  let match = 0;
+  console_codes.forEach(obj => {
+    if (obj.name.toUpperCase() === consoleName.toUpperCase()) {
+      match = obj.code;
+    }
+  });
+
+  return match;
+}
+
 
 const console_codes = [{
   code: 49,
@@ -91,3 +92,5 @@ const console_codes = [{
   name: 'Saturn'
 }
 ];
+
+module.exports.getConsoleNumber = getConsoleNumber;
