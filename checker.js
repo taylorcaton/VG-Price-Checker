@@ -1,6 +1,9 @@
 const querystring = require('querystring');
 const fetch = require('node-fetch');
 
+// This is pricecharting.com's official endpoint for looking up console game prices 
+const priceChartingURL = 'https://www.pricecharting.com/search-products?type=cart&consoles='
+
 async function getPrice(game, CONSOLE_NUMBER) {
   try {
     const response = await fetch(buildGameURL(game, CONSOLE_NUMBER));
@@ -15,7 +18,7 @@ function buildGameURL(game, consoleNumber) {
   let query = querystring.stringify({
     q: game
   });
-  let url = `https://www.pricecharting.com/search-products?type=cart&consoles=${consoleNumber}&${query}`;
+  let url = `${priceChartingURL}${consoleNumber}&${query}`;
   return url;
 }
 
