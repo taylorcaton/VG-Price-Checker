@@ -1,8 +1,16 @@
 const querystring = require('querystring');
 const fetch = require('node-fetch');
 
-// This is pricecharting.com's official endpoint for looking up console game prices 
-const priceChartingURL = 'https://www.pricecharting.com/search-products?type=cart&consoles='
+// This is pricecharting.com's official endpoint for looking up console game prices
+const priceChartingURL = 'https://www.pricecharting.com/search-products?type=cart&consoles=';
+
+function buildGameURL(game, consoleNumber) {
+  const query = querystring.stringify({
+    q: game,
+  });
+  const url = `${priceChartingURL}${consoleNumber}&${query}`;
+  return url;
+}
 
 async function getPrice(game, CONSOLE_NUMBER) {
   try {
@@ -12,14 +20,6 @@ async function getPrice(game, CONSOLE_NUMBER) {
   } catch (error) {
     console.log(error);
   }
-}
-
-function buildGameURL(game, consoleNumber) {
-  let query = querystring.stringify({
-    q: game
-  });
-  let url = `${priceChartingURL}${consoleNumber}&${query}`;
-  return url;
 }
 
 module.exports.buildGameURL = buildGameURL;
