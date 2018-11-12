@@ -6,7 +6,6 @@
   "dependencies": {
     "buffered-reader": "^1.0.1",
     "console.table": "^0.10.0",
-    "eslint-config-airbnb-base": "^12.1.0",
     "fuzzy-matching": "^0.4.3",
     "json2csv": "^4.1.3",
     "line-by-line": "^0.1.6",
@@ -18,6 +17,9 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0"
   },
   "scripts": {
