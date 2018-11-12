@@ -1,72 +1,73 @@
 // Make sure we got a filename on the command line.
 if (process.argv.length < 3) {
-  console.log('Usage: node ' + process.argv[1] + ' FILENAME [CONSOLE_NUMBER]');
+  console.log(`Usage: node ${process.argv[1]} FILENAME [CONSOLE_NUMBER]`);
   process.exit(1);
 }
 
-var FuzzyMatching = require('fuzzy-matching');
+const FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
+const LineByLineReader = require('line-by-line');
+const cTable = require('console.table');
 const csv = require('./csv.js');
 const checker = require('./checker.js');
 const systems = require('./systems.js');
-const cTable = require('console.table');
+
 const CONSOLE_NAME = process.argv[3] ? process.argv[3] : 'NES';
 const CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
 const textFileToRead = process.argv[2];
-const LineByLineReader = require('line-by-line'),
-  lr = new LineByLineReader(textFileToRead);
+const lr = new LineByLineReader(textFileToRead);
 
-let gamesObj = [];
+const gamesObj = [];
 let valueTotal = 0;
-let previousPrices = getPreviousPrices();
+const previousPrices = getPreviousPrices();
 
-lr.on('error', function (err) {
+lr.on('error', (err) => {
   // 'err' contains error object
   console.log('Line Reader Error', err);
 });
 
 // Reads each line
-lr.on('line', function (gameName) {
-  lr.pause(); //Pause until data comes back.
+lr.on('line', (gameName) => {
+  lr.pause(); // Pause until data comes back.
 
-  checker.getPrice(gameName, CONSOLE_NUMBER).then(priceObj => {
+  checker
+    .getPrice(gameName, CONSOLE_NUMBER)
+    .then((priceObj) => {
+      let index = 0;
 
-    let index = 0;
+      // Is there more than one match?
+      if (priceObj.length > 1) {
+        // Get the index of the closest match
+        index = fuzzyMatch(gameName, priceObj.map((a) => a.label));
 
-    // Is there more than one match?
-    if (priceObj.length > 1) {
-      // Get the index of the closest match
-      index = fuzzyMatch(gameName, priceObj.map(a => a.label));
+        // Print findings
+        console.log(`Multiple Matches Found for search value: ${gameName}`);
+        // console.log(priceObj.map(a => a.label));
+        // console.log(`Match found at index #${index}`);
+        console.log(`Using closest match: ${priceObj[index].label}`);
+        console.log('');
+      }
 
-      // Print findings
-      console.log(`Multiple Matches Found for search value: ${gameName}`);
-      // console.log(priceObj.map(a => a.label));
-      // console.log(`Match found at index #${index}`);
-      console.log(`Using closest match: ${priceObj[index].label}`);
-      console.log('');
-    }
+      // Add game name and price to array of objects
+      if (priceObj[index] !== undefined) {
+        gamesObj.push({
+          name: priceObj[index].label,
+          price: priceObj[index].prices[0],
+        });
 
-    // Add game name and price to array of objects
-    if(priceObj[index] != undefined){
-      gamesObj.push({
-        name: priceObj[index].label,
-        price: priceObj[index].prices[0]
-      });
+        // Add price to total
+        valueTotal += Number(priceObj[index].prices[0]);
+      } else {
+        console.error(`Could not not find anything matching ${gameName}`);
+      }
 
-      // Add price to total
-      valueTotal += Number(priceObj[index].prices[0]);
-
-    } else {
-      console.error(`Could not not find anything matching ${gameName}`)
-    }
-    
-    // Read the next line
-    lr.resume();
-  })
-  .catch(err => console.log(err));
+      // Read the next line
+      lr.resume();
+    })
+    .catch((err) => console.log(err));
 });
 
-lr.on('end', function () {
+lr.on('end', () => {
   console.log('All lines are read, file is closed now.');
   saveStorage();
   compareIndividualPrices();
@@ -74,30 +75,29 @@ lr.on('end', function () {
 });
 
 function fuzzyMatch(game, list) {
-  var fm = new FuzzyMatching(list);
+  const fm = new FuzzyMatching(list);
   return list.indexOf(fm.get(game).value);
 }
 
 async function getPreviousPrices() {
   await storage.init({
-    dir: './storage'
+    dir: './storage',
   });
 
-  let arr = await storage.getItem(`previousPricesArray${CONSOLE_NUMBER}`);
+  const arr = await storage.getItem(`previousPricesArray${CONSOLE_NUMBER}`);
   if (arr) {
     return arr;
-  } else {
-    return [];
   }
+  return [];
 }
 
 async function saveStorage() {
-  let today = new Date();
-  let total = Number.parseFloat(valueTotal).toFixed(2);
-  previousPrices.then(arr => {
+  const today = new Date();
+  const total = Number.parseFloat(valueTotal).toFixed(2);
+  previousPrices.then((arr) => {
     arr.push({
       date: today.toLocaleDateString('en-US'),
-      total: total
+      total,
     });
     storeIt(arr);
   });
@@ -112,10 +112,9 @@ async function storeIt(arr) {
 }
 
 async function compareIndividualPrices() {
-
   // Get stored individual prices
-  let oldPrices = await storage.getItem(`oldPrices${CONSOLE_NUMBER}`);
-  let priceChanges = [];
+  const oldPrices = await storage.getItem(`oldPrices${CONSOLE_NUMBER}`);
+  const priceChanges = [];
 
   // If there are no individual prices, create the entry
   if (!oldPrices) {
@@ -127,21 +126,18 @@ async function compareIndividualPrices() {
   gamesObj.forEach((game, index) => {
     oldPrices.forEach((oldGame, oldIndex) => {
       if (game.name === oldGame.name) {
-
         // If the game price is not the same
         if (game.price !== oldGame.price) {
-          
           // The price has changed, keep track in a separate array and update database
           oldPrices[oldIndex] = gamesObj[index];
-          let changeObj = {
+          const changeObj = {
             name: game.name,
             oldPrice: oldGame.price,
             newPrice: game.price,
             change: Number.parseFloat(game.price - oldGame.price).toFixed(2),
-            percentChange: `%${((Number.parseFloat(game.price - oldGame.price).toFixed(2)) / oldGame.price * 100).toFixed(2) }`
-          }
+            percentChange: `%${((Number.parseFloat(game.price - oldGame.price).toFixed(2) / oldGame.price) * 100).toFixed(2)}`, // this.change isn't working... hmmm
+          };
           priceChanges.push(changeObj);
-
         }
       }
     });
@@ -154,5 +150,4 @@ async function compareIndividualPrices() {
   } else {
     console.log('No price changes since this tool was last run');
   }
-
 }
