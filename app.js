@@ -60,10 +60,6 @@ lr.on('line', function (gameName) {
       console.error(`Could not not find anything matching ${gameName}`)
     }
     
-    
-
-    
-
     // Read the next line
     lr.resume();
   })
@@ -129,23 +125,24 @@ async function compareIndividualPrices() {
 
   // Check to see if there are any price differences between current and stored games
   gamesObj.forEach((game, index) => {
-    oldPrices.every((oldGame, oldIndex) => {
+    oldPrices.forEach((oldGame, oldIndex) => {
       if (game.name === oldGame.name) {
 
-        // If the game price is the same, 'break' out of the loop
-        if (game.price === oldGame.price) {
-          return false;
-        }
+        // If the game price is not the same
+        if (game.price !== oldGame.price) {
+          
+          // The price has changed, keep track in a separate array and update database
+          oldPrices[oldIndex] = gamesObj[index];
+          let changeObj = {
+            name: game.name,
+            oldPrice: oldGame.price,
+            newPrice: game.price,
+            change: Number.parseFloat(game.price - oldGame.price).toFixed(2),
+            percentChange: `%${((Number.parseFloat(game.price - oldGame.price).toFixed(2)) / oldGame.price * 100).toFixed(2) }`
+          }
+          priceChanges.push(changeObj);
 
-        // The price has changed, keep track in a separate array and update database
-        oldPrices[oldIndex] = gamesObj[index];
-        priceChanges.push({
-          name: game.name,
-          oldPrice: oldGame.price,
-          newPrice: game.price,
-          change: Number.parseFloat(game.price - oldGame.price).toFixed(2),
-          percentChange: `%${Math.round( this.change / oldGame.price * 100 )}`
-        });
+        }
       }
     });
   });
