@@ -1,8 +1,8 @@
+/* eslint-disable no-await-in-loop, no-restricted-syntax */
+const FuzzyMatching = require('fuzzy-matching');
 const checker = require('./checker.js');
-var FuzzyMatching = require('fuzzy-matching');
 
 class Price_Checker {
-
   constructor(gameList, CONSOLE_NUMBER) {
     this.gameList = gameList;
     this.CONSOLE_NUMBER = CONSOLE_NUMBER;
@@ -12,11 +12,11 @@ class Price_Checker {
 
   async buildPriceList() {
     for (const game of this.gameList) {
-      let priceResults = await this.getPriceOfSingleGame(game);
+      const priceResults = await this.getPriceOfSingleGame(game);
       this.pricedList.push({
         // Game Object
         name: priceResults.label,
-        price: priceResults.prices[0]
+        price: priceResults.prices[0],
       });
       // Add price to total
       this.valueTotal += Number(priceResults.prices[0]);
@@ -25,26 +25,26 @@ class Price_Checker {
   }
 
   async getPriceOfSingleGame(gameName, verbose) {
-    let priceResults = await checker.getPrice(gameName, this.CONSOLE_NUMBER);
+    const priceResults = await checker.getPrice(gameName, this.CONSOLE_NUMBER);
     let index = 0;
 
     // Is there more than one match?
     if (priceResults.length > 1) {
       // Get the index of the closest match
-      index = this.fuzzyMatch(gameName, priceResults.map(a => a.label));
+      index = this.fuzzyMatch(gameName, priceResults.map((a) => a.label));
 
       // Print Findings
-      if(verbose) this.printFindings(gameName, priceResults[index].label);
+      if (verbose) this.printFindings(gameName, priceResults[index].label);
     }
     return priceResults[index];
   }
 
-  fuzzyMatch(game, list) {
-    var fm = new FuzzyMatching(list);
+  static fuzzyMatch(game, list) {
+    const fm = new FuzzyMatching(list);
     return list.indexOf(fm.get(game).value);
   }
 
-  printFindings(originalGameName, closestMatch){
+  static printFindings(originalGameName, closestMatch) {
     console.log(`Multiple Matches Found for search value: ${originalGameName}`);
     console.log(`Using closest match: ${closestMatch}`);
     console.log('');
