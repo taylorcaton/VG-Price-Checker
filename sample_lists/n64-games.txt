@@ -12,7 +12,9 @@ Mario Golf
 Mario Kart 64
 Mario Tennis
 Paper Mario
+Ridge Racer 64
 Rush 2
+Star Wars Pod Racer
 Star Wars Rogue Squadron
 Super Mario 64
 Super Smash Bros.
@@ -20,3 +22,4 @@ The Legend of Zelda Majora's Mask
 The Legend of Zelda Ocarina of Time
 Tony Hawk
 Wave Race
+Wayne Gretzky Hockey
