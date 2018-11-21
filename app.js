@@ -7,7 +7,6 @@ if (process.argv.length < 3) {
 const FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
 const LineByLineReader = require('line-by-line');
-const cTable = require('console.table');
 const csv = require('./csv.js');
 const checker = require('./checker.js');
 const systems = require('./systems.js');
