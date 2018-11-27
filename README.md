@@ -2,7 +2,7 @@
 
 Takes a list of games from a text file and creates a csv with all of their current prices.
 
-*(requires node >= 8)*
+(requires node >= 8)
 
 ```bash
 npm install
