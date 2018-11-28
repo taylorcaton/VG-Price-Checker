@@ -34,4 +34,6 @@ node app.js TEXT_FILE CONSOLE_NAME
 - [x] Pretty Print Totals
 - [x] Show which games have lost or gained value
 - [x] More Console Support
+- [ ] Add spinners and better console logs
+- [ ] Better / More command-line params
 - [ ] Google Sheets integration
