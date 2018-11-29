@@ -35,5 +35,5 @@ node app.js TEXT_FILE CONSOLE_NAME
 - [x] Show which games have lost or gained value
 - [x] More Console Support
 - [ ] Add spinners and better console logs
-- [ ] Better / More command-line params
+- [ ] Add option for verbose
 - [ ] Google Sheets integration
