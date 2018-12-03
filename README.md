@@ -6,7 +6,7 @@ Takes a list of games from a text file and creates a csv with all of their curre
 
 ```bash
 npm install
-node app.js TEXT_FILE CONSOLE_NAME
+node app.js TEXT_FILE -c CONSOLE_NAME
 ```
 
 - TEXT_FILE: Location of text file (please include .txt extension)
