@@ -27,13 +27,13 @@ node app.js TEXT_FILE -c CONSOLE_NAME
 ### TODO
 
 - [x] NES and SNES Support
-- [x] Display Totals
-- [x] Display Totals over time
-- [x] Save Totals to compare over time
+- [x] Display totals
+- [x] Display totals over time
+- [x] Save totals to compare over time
 - [x] Natural language instead of console number
-- [x] Pretty Print Totals
+- [x] Pretty print totals
 - [x] Show which games have lost or gained value
-- [x] More Console Support
+- [x] More console support
 - [x] Revamped command-line arguments
 - [ ] Add spinners and better console logs
 - [ ] Add option for verbose
