@@ -1,19 +1,45 @@
 // Make sure we got a filename on the command line.
 if (process.argv.length < 3) {
-  console.log(`Usage: node ${process.argv[1]} FILENAME [CONSOLE_NUMBER]`);
+  console.log(`Usage: node ${process.argv[1]} FILENAME -c [CONSOLE_NUMBER]`);
   process.exit(1);
 }
 
 const FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
 const LineByLineReader = require('line-by-line');
+const commandLineArgs = require('command-line-args');
 const csv = require('./csv.js');
 const checker = require('./checker.js');
 const systems = require('./systems.js');
 
-const CONSOLE_NAME = process.argv[3] ? process.argv[3] : 'NES';
+// Command Line Options Def
+const commandLineDefinitions = [
+  {
+    name: 'verbose',
+    alias: 'v',
+    type: Boolean,
+  },
+  {
+    name: 'src',
+    type: String,
+    defaultOption: true,
+  },
+  {
+    name: 'console',
+    alias: 'c',
+    type: String,
+  },
+];
+const options = commandLineArgs(commandLineDefinitions);
+
+if (!options.console) {
+  console.log('Missing console option!');
+  console.log(`Usage: node ${process.argv[1]} FILENAME -c [CONSOLE_NUMBER]`);
+}
+
+const CONSOLE_NAME = options.console;
 const CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
-const textFileToRead = process.argv[2];
+const textFileToRead = options.src;
 const lr = new LineByLineReader(textFileToRead);
 
 const gamesObj = [];
