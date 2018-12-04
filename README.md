@@ -6,13 +6,14 @@ Takes a list of games from a text file and creates a csv with all of their curre
 
 ```bash
 npm install
-node app.js TEXT_FILE -c CONSOLE_NAME
+node app.js TEXT_FILE -c CONSOLE_NAME -v
 ```
 
 - TEXT_FILE: Location of text file (please include .txt extension)
   - list of games separated by a new line
-- CONSOLE_NAME: Short Name of the console
+- (-c) CONSOLE_NAME: Short Name of the console
   - See list below
+- (-v) Verbose
 
 ## Console Names
 
@@ -36,5 +37,5 @@ node app.js TEXT_FILE -c CONSOLE_NAME
 - [x] More console support
 - [x] Revamped command-line arguments
 - [ ] Add spinners and better console logs
-- [ ] Add option for verbose
+- [x] Add option for verbose
 - [ ] Google Sheets integration
