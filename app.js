@@ -40,6 +40,7 @@ if (!options.console) {
 const CONSOLE_NAME = options.console;
 const CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
 const textFileToRead = options.src;
+const verbose = options ? options.verbose : false;
 const lr = new LineByLineReader(textFileToRead);
 
 const gamesObj = [];
@@ -66,10 +67,15 @@ lr.on('line', (gameName) => {
         index = fuzzyMatch(gameName, priceObj.map((a) => a.label));
 
         // Print findings
-        console.log(`Multiple Matches Found for search value: ${gameName}`);
-        // console.log(priceObj.map(a => a.label));
-        // console.log(`Match found at index #${index}`);
-        console.log(`Using closest match: ${priceObj[index].label}`);
+        if (verbose) {
+          console.log(`Multiple Matches Found for search value: ${gameName}`);
+          // console.log(priceObj.map(a => a.label));
+          // console.log(`Match found at index #${index}`);
+          console.log(`Using closest match: ${priceObj[index].label}`);
+          console.log('');
+        }
+      } else if (verbose) {
+        console.log(`Found match: ${priceObj[index].label}`);
         console.log('');
       }
 
@@ -93,7 +99,7 @@ lr.on('line', (gameName) => {
 });
 
 lr.on('end', () => {
-  console.log('All lines are read, file is closed now.');
+  if (verbose) console.log('All lines are read, file is closed now.');
   saveStorage();
   compareIndividualPrices();
   csv(gamesObj, CONSOLE_NAME);
@@ -132,8 +138,10 @@ async function storeIt(arr) {
   await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
 
   // Display Reults
-  console.log(`Totals History for the ${CONSOLE_NAME}`);
-  console.table(arr);
+  if (verbose) {
+    console.log(`Totals History for the ${CONSOLE_NAME}`);
+    console.table(arr);
+  }
 }
 
 async function compareIndividualPrices() {
@@ -170,9 +178,9 @@ async function compareIndividualPrices() {
 
   // Update the database
   await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, oldPrices);
-  if (priceChanges.length) {
+  if (priceChanges.length && verbose) {
     console.table(priceChanges);
-  } else {
+  } else if (verbose) {
     console.log('No price changes since this tool was last run');
   }
 }

@@ -10,9 +10,9 @@ class Price_Checker {
     this.valueTotal = 0;
   }
 
-  async buildPriceList() {
+  async buildPriceList(verbose = false) {
     for (const game of this.gameList) {
-      const priceResults = await this.getPriceOfSingleGame(game);
+      const priceResults = await this.getPriceOfSingleGame(game, verbose);
       this.pricedList.push({
         // Game Object
         name: priceResults.label,
