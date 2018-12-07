@@ -69,8 +69,6 @@ lr.on('line', (gameName) => {
         // Print findings
         if (verbose) {
           console.log(`Multiple Matches Found for search value: ${gameName}`);
-          // console.log(priceObj.map(a => a.label));
-          // console.log(`Match found at index #${index}`);
           console.log(`Using closest match: ${priceObj[index].label}`);
           console.log('');
         }
