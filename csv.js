@@ -12,7 +12,7 @@ module.exports = (gamesObj, CONSOLE_NAME) => {
     if (err) {
       console.log('Some error occurred - file either not saved or corrupted file saved.', err);
     } else {
-      console.log(`CSV saved to gameList-${CONSOLE_NAME}.csv!`);
+      console.log(`\nCSV saved to gameList-${CONSOLE_NAME}.csv!`);
     }
   });
 };

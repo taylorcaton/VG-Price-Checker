@@ -8,6 +8,7 @@ const FuzzyMatching = require('fuzzy-matching');
 const storage = require('node-persist');
 const LineByLineReader = require('line-by-line');
 const commandLineArgs = require('command-line-args');
+const ora = require('ora');
 const csv = require('./csv.js');
 const checker = require('./checker.js');
 const systems = require('./systems.js');
@@ -42,6 +43,9 @@ const CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
 const textFileToRead = options.src;
 const verbose = options ? options.verbose : false;
 const lr = new LineByLineReader(textFileToRead);
+const spinner = ora(`Using ${textFileToRead} with ${CONSOLE_NAME}`);
+
+if (!verbose) spinner.start();
 
 const gamesObj = [];
 let valueTotal = 0;
@@ -180,5 +184,7 @@ async function compareIndividualPrices() {
     console.table(priceChanges);
   } else if (verbose) {
     console.log('No price changes since this tool was last run');
+  } else {
+    spinner.succeed();
   }
 }
