@@ -185,6 +185,6 @@ async function compareIndividualPrices() {
   } else if (verbose) {
     console.log('No price changes since this tool was last run');
   } else {
-    spinner.succeed();
+    spinner.succeed(`Done checking ${CONSOLE_NAME} prices for ${textFileToRead}`);
   }
 }
