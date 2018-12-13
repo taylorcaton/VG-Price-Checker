@@ -9,10 +9,15 @@ npm install
 node app.js TEXT_FILE -c CONSOLE_NAME -v
 ```
 
+**REQUIRED:**
+
 - TEXT_FILE: Location of text file (please include .txt extension)
   - list of games separated by a new line
 - (-c) CONSOLE_NAME: Short Name of the console
   - See list below
+
+**OPTIONAL:**
+
 - (-v) Verbose
 
 ## Console Names
