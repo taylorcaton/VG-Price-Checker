@@ -44,4 +44,5 @@ node app.js TEXT_FILE -c CONSOLE_NAME -v
 - [x] Add spinners and better console logs
 - [x] Add option for verbose
 - [ ] Quick search for a single game
+- [ ] Clear Data Option
 - [ ] Google Sheets integration
