@@ -1,4 +1,11 @@
 /* eslint-disable no-await-in-loop, no-restricted-syntax */
+
+/**
+ * This file is a WORK IN PROGRESS, this file is not used in the node app
+ *
+ * An attempt to use OOP
+ */
+
 const FuzzyMatching = require('fuzzy-matching');
 const checker = require('./checker.js');
 
