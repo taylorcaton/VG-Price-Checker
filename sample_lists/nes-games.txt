@@ -28,12 +28,11 @@ Double Dragon 2
 Dr. Mario
 Duck Hunt [5-Screw]
 Duck Tales
-Eggsplode & Short Order
 Excitebike
 Felix the Cat
 Golf
 Guardian Legend
-Gunsmoke
+Gun.Smoke
 Gyromite [5-Screw]
 Gyruss
 Hogan's Alley
@@ -52,6 +51,7 @@ Little Nemo
 Low G Man
 Mach Rider
 Maniac Mansion
+Short Order/Eggsplode
 Super Mario Bros 2
 Super Mario Bros 3
 Mario Bros
