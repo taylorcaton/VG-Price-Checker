@@ -44,12 +44,95 @@ const textFileToRead = options.src;
 const verbose = options ? options.verbose : false;
 const lr = new LineByLineReader(textFileToRead);
 const spinner = ora(`Using ${textFileToRead} with ${CONSOLE_NAME}`);
+const gamesObj = [];
+let valueTotal = 0;
+
+function fuzzyMatch(game, list) {
+  const fm = new FuzzyMatching(list);
+  return list.indexOf(fm.get(game).value);
+}
+
+async function getPreviousPrices() {
+  await storage.init({
+    dir: './storage',
+  });
+
+  const arr = await storage.getItem(`previousPricesArray${CONSOLE_NUMBER}`);
+  if (arr) {
+    return arr;
+  }
+  return [];
+}
+
+const previousPrices = getPreviousPrices();
+
+async function storeIt(arr) {
+  await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
+
+  // Display Reults
+  if (verbose) {
+    console.log(`Totals History for the ${CONSOLE_NAME}`);
+    console.table(arr);
+  }
+}
+
+async function saveStorage() {
+  const today = new Date();
+  const total = Number.parseFloat(valueTotal).toFixed(2);
+  previousPrices.then((arr) => {
+    arr.push({
+      date: today.toLocaleDateString('en-US'),
+      total,
+    });
+    storeIt(arr);
+  });
+}
+
+async function compareIndividualPrices() {
+  // Get stored individual prices
+  const oldPrices = await storage.getItem(`oldPrices${CONSOLE_NUMBER}`);
+  const priceChanges = [];
+
+  // If there are no individual prices, create the entry
+  if (!oldPrices) {
+    await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, gamesObj);
+    return;
+  }
+
+  // Check to see if there are any price differences between current and stored games
+  gamesObj.forEach((game, index) => {
+    oldPrices.forEach((oldGame, oldIndex) => {
+      if (game.name === oldGame.name) {
+        // If the game price is not the same
+        if (game.price !== oldGame.price) {
+          // The price has changed, keep track in a separate array and update database
+          oldPrices[oldIndex] = gamesObj[index];
+          const changeObj = {
+            name: game.name,
+            oldPrice: oldGame.price,
+            newPrice: game.price,
+            change: Number.parseFloat(game.price - oldGame.price).toFixed(2),
+            percentChange: `%${((Number.parseFloat(game.price - oldGame.price).toFixed(2) / oldGame.price) * 100).toFixed(2)}`, // this.change isn't working... hmmm
+          };
+          priceChanges.push(changeObj);
+        }
+      }
+    });
+  });
+
+  // Update the database
+  await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, oldPrices);
+  if (priceChanges.length && verbose) {
+    console.table(priceChanges);
+  } else if (verbose) {
+    console.log('No price changes since this tool was last run');
+  } else {
+    spinner.succeed(`Done checking ${CONSOLE_NAME} prices for ${textFileToRead}`);
+  }
+}
 
 if (!verbose) spinner.start();
 
-const gamesObj = [];
-let valueTotal = 0;
-const previousPrices = getPreviousPrices();
 
 lr.on('error', (err) => {
   // 'err' contains error object
@@ -106,85 +189,3 @@ lr.on('end', () => {
   compareIndividualPrices();
   csv(gamesObj, CONSOLE_NAME);
 });
-
-function fuzzyMatch(game, list) {
-  const fm = new FuzzyMatching(list);
-  return list.indexOf(fm.get(game).value);
-}
-
-async function getPreviousPrices() {
-  await storage.init({
-    dir: './storage',
-  });
-
-  const arr = await storage.getItem(`previousPricesArray${CONSOLE_NUMBER}`);
-  if (arr) {
-    return arr;
-  }
-  return [];
-}
-
-async function saveStorage() {
-  const today = new Date();
-  const total = Number.parseFloat(valueTotal).toFixed(2);
-  previousPrices.then((arr) => {
-    arr.push({
-      date: today.toLocaleDateString('en-US'),
-      total,
-    });
-    storeIt(arr);
-  });
-}
-
-async function storeIt(arr) {
-  await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
-
-  // Display Reults
-  if (verbose) {
-    console.log(`Totals History for the ${CONSOLE_NAME}`);
-    console.table(arr);
-  }
-}
-
-async function compareIndividualPrices() {
-  // Get stored individual prices
-  const oldPrices = await storage.getItem(`oldPrices${CONSOLE_NUMBER}`);
-  const priceChanges = [];
-
-  // If there are no individual prices, create the entry
-  if (!oldPrices) {
-    await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, gamesObj);
-    return;
-  }
-
-  // Check to see if there are any price differences between current and stored games
-  gamesObj.forEach((game, index) => {
-    oldPrices.forEach((oldGame, oldIndex) => {
-      if (game.name === oldGame.name) {
-        // If the game price is not the same
-        if (game.price !== oldGame.price) {
-          // The price has changed, keep track in a separate array and update database
-          oldPrices[oldIndex] = gamesObj[index];
-          const changeObj = {
-            name: game.name,
-            oldPrice: oldGame.price,
-            newPrice: game.price,
-            change: Number.parseFloat(game.price - oldGame.price).toFixed(2),
-            percentChange: `%${((Number.parseFloat(game.price - oldGame.price).toFixed(2) / oldGame.price) * 100).toFixed(2)}`, // this.change isn't working... hmmm
-          };
-          priceChanges.push(changeObj);
-        }
-      }
-    });
-  });
-
-  // Update the database
-  await storage.setItem(`oldPrices${CONSOLE_NUMBER}`, oldPrices);
-  if (priceChanges.length && verbose) {
-    console.table(priceChanges);
-  } else if (verbose) {
-    console.log('No price changes since this tool was last run');
-  } else {
-    spinner.succeed(`Done checking ${CONSOLE_NAME} prices for ${textFileToRead}`);
-  }
-}
