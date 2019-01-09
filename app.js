@@ -63,7 +63,7 @@ const previousPrices = getPreviousPrices();
 async function storeIt(arr) {
   await storage.setItem(`previousPricesArray${CONSOLE_NUMBER}`, arr);
 
-  // Display Reults
+  // Display Results
   if (verbose) {
     console.log(`Totals History for the ${CONSOLE_NAME}`);
     console.table(arr);
