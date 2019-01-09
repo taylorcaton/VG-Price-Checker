@@ -16,19 +16,13 @@ const systems = require('./systems.js');
 // Command Line Options Def
 const commandLineDefinitions = [
   {
-    name: 'verbose',
-    alias: 'v',
-    type: Boolean,
+    name: 'verbose', alias: 'v', type: Boolean,
   },
   {
-    name: 'src',
-    type: String,
-    defaultOption: true,
+    name: 'src', type: String, defaultOption: true,
   },
   {
-    name: 'console',
-    alias: 'c',
-    type: String,
+    name: 'console', alias: 'c', type: String,
   },
 ];
 const options = commandLineArgs(commandLineDefinitions);
