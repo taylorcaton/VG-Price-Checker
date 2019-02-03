@@ -5,6 +5,7 @@ Balloon Fight
 Baseball
 Batman The Video Game
 Battletoads
+Battle of Olympus
 Bionic Commando
 Blades of Steel
 Blaster Master
@@ -24,6 +25,7 @@ Donkey Kong [5-Screw]
 Donkey Kong 3
 Donkey Kong Classics
 Donkey Kong Jr. [5-Screw]
+Donkey Kong Jr. Math [5-Screw]
 Double Dragon 2
 Dr. Mario
 Duck Hunt [5-Screw]
@@ -32,6 +34,7 @@ Excitebike
 Felix the Cat
 Golf
 Guardian Legend
+Gumshoe
 Gun.Smoke
 Gyromite [5-Screw]
 Gyruss
