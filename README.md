@@ -43,6 +43,6 @@ node app.js TEXT_FILE -c CONSOLE_NAME -v
 - [x] Revamped command-line arguments
 - [x] Add spinners and better console logs
 - [x] Add option for verbose
-- [ ] Quick search for a single game
+- [x] Quick search for a single game
 - [ ] Clear Data Option (by date, full clear)
 - [ ] Google Sheets integration
