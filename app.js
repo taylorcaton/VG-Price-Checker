@@ -22,24 +22,39 @@ const commandLineDefinitions = [
     name: 'src', type: String, defaultOption: true,
   },
   {
-    name: 'console', alias: 'c', type: String,
+    name: 'console', alias: 'c', type: String, defaultValue: 'NES',
+  },
+  {
+    name: 'singleGame', alias: 'g', type: String,
   },
 ];
 const options = commandLineArgs(commandLineDefinitions);
 
+
+let CONSOLE_NAME = '';
+let CONSOLE_NUMBER = '';
+let textFileToRead = '';
+const verbose = options ? options.verbose : false;
+let lr = '';
+const spinner = ora();
+const gamesObj = [];
+let valueTotal = 0;
+
 if (!options.console) {
   console.log('Missing console option!');
   console.log(`Usage: node ${process.argv[1]} FILENAME -c [CONSOLE_NUMBER]`);
+  process.exit(1);
+} else {
+  CONSOLE_NAME = options.console;
+  CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
 }
 
-const CONSOLE_NAME = options.console;
-const CONSOLE_NUMBER = systems.getConsoleNumber(CONSOLE_NAME);
-const textFileToRead = options.src;
-const verbose = options ? options.verbose : false;
-const lr = new LineByLineReader(textFileToRead);
-const spinner = ora(`Using ${textFileToRead} with ${CONSOLE_NAME}`);
-const gamesObj = [];
-let valueTotal = 0;
+if (!options.src) {
+  console.log('No source file specified, this is needed for a batch look-up');
+} else {
+  textFileToRead = options.src;
+  lr = new LineByLineReader(textFileToRead);
+}
 
 function fuzzyMatch(game, list) {
   const fm = new FuzzyMatching(list);
@@ -128,58 +143,77 @@ async function compareIndividualPrices() {
 if (!verbose) spinner.start();
 
 
-lr.on('error', (err) => {
-  // 'err' contains error object
-  console.log('Line Reader Error', err);
-});
-
-// Reads each line
-lr.on('line', (gameName) => {
-  lr.pause(); // Pause until data comes back.
-
+if (options.singleGame) {
+  // Find single game price and return result
   checker
-    .getPrice(gameName, CONSOLE_NUMBER)
+    .getPrice(options.singleGame, CONSOLE_NUMBER)
     .then((priceObj) => {
-      let index = 0;
+      if (!priceObj) {
+        console.log('No game found');
+        process.exit(0);
+      }
+      priceObj.forEach((obj) => {
+        console.log(`
+        NAME: ${obj.label}
+        PRICE: $${obj.prices[0]}
+        `);
+      });
+      process.exit(0);
+    });
+} else {
+  lr.on('error', (err) => {
+    // 'err' contains error object
+    console.log('Line Reader Error', err);
+  });
 
-      // Is there more than one match?
-      if (priceObj.length > 1) {
-        // Get the index of the closest match
-        index = fuzzyMatch(gameName, priceObj.map((a) => a.label));
+  // Reads each line
+  lr.on('line', (gameName) => {
+    lr.pause(); // Pause until data comes back.
 
-        // Print findings
-        if (verbose) {
-          console.log(`Multiple Matches Found for search value: ${gameName}`);
-          console.log(`Using closest match: ${priceObj[index].label}`);
+    checker
+      .getPrice(gameName, CONSOLE_NUMBER)
+      .then((priceObj) => {
+        let index = 0;
+
+        // Is there more than one match?
+        if (priceObj.length > 1) {
+          // Get the index of the closest match
+          index = fuzzyMatch(gameName, priceObj.map((a) => a.label));
+
+          // Print findings
+          if (verbose) {
+            console.log(`Multiple Matches Found for search value: ${gameName}`);
+            console.log(`Using closest match: ${priceObj[index].label}`);
+            console.log('');
+          }
+        } else if (verbose) {
+          console.log(`Found match: ${priceObj[index].label}`);
           console.log('');
         }
-      } else if (verbose) {
-        console.log(`Found match: ${priceObj[index].label}`);
-        console.log('');
-      }
 
-      // Add game name and price to array of objects
-      if (priceObj[index] !== undefined) {
-        gamesObj.push({
-          name: priceObj[index].label,
-          price: priceObj[index].prices[0],
-        });
+        // Add game name and price to array of objects
+        if (priceObj[index] !== undefined) {
+          gamesObj.push({
+            name: priceObj[index].label,
+            price: priceObj[index].prices[0],
+          });
 
-        // Add price to total
-        valueTotal += Number(priceObj[index].prices[0]);
-      } else {
-        console.error(`Could not not find anything matching ${gameName}`);
-      }
+          // Add price to total
+          valueTotal += Number(priceObj[index].prices[0]);
+        } else {
+          console.error(`Could not not find anything matching ${gameName}`);
+        }
 
-      // Read the next line
-      lr.resume();
-    })
-    .catch((err) => console.log(err));
-});
+        // Read the next line
+        lr.resume();
+      })
+      .catch((err) => console.log(err));
+  });
 
-lr.on('end', () => {
-  if (verbose) console.log('All lines are read, file is closed now.');
-  saveStorage();
-  compareIndividualPrices();
-  csv(gamesObj, CONSOLE_NAME);
-});
+  lr.on('end', () => {
+    if (verbose) console.log('All lines are read, file is closed now.');
+    saveStorage();
+    compareIndividualPrices();
+    csv(gamesObj, CONSOLE_NAME);
+  });
+}
