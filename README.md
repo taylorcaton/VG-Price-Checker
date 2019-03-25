@@ -46,3 +46,4 @@ node app.js TEXT_FILE -c CONSOLE_NAME -v
 - [x] Quick search for a single game
 - [ ] Clear Data Option (by date, full clear)
 - [ ] Google Sheets integration
+- [ ] Make it function like an actual "Node Module"
