@@ -57,11 +57,12 @@ Maniac Mansion
 Short Order/Eggsplode
 Super Mario Bros 2
 Super Mario Bros 3
+Super Mario Bros Duck Hunt World Class Track Meet
 Mario Bros
-MegaMan 2
-MegaMan 3
-MegaMan 4
-MegaMan 6
+Mega Man 2
+Mega Man 3
+Mega Man 4
+Mega Man 6
 Metal Gear
 Metroid
 Mike Tyson's Punch Out
@@ -76,6 +77,7 @@ Rad Racer
 RBI Baseball
 RBI Baseball 2
 River City Ransom
+Short Order Eggsplode
 Silver Surfer
 Skate or Die
 Slalom [5-Screw]
@@ -83,9 +85,10 @@ Soccer [5-Screw]
 Solomon's Key
 Stack Up
 Super Mario Bros [5-Screw]
-Super Mario Brothers and Duck Hunt
+Super Mario Bros and Duck Hunt
 Tecmo Super Bowl
 Tecmo Bowl
+Teenage Mutant Ninja Turtles
 Teenage Mutant Ninja Turtles 2
 Tennis
 Tetris
@@ -98,6 +101,6 @@ Wario's Woods
 Whomp 'Em
 Wild Gunman [5-Screw]
 Wrecking Crew
-The Legend of Zelda
+Legend of Zelda
 Zelda no Densetsu 1
-The Adventures of Link
+Zelda II The Adventures of Link
