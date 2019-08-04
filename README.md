@@ -47,3 +47,4 @@ node app.js TEXT_FILE -c CONSOLE_NAME -v
 - [ ] Clear Data Option (by date, full clear)
 - [ ] Google Sheets integration
 - [ ] Make it function like an actual "Node Module"
+- [ ] Convert callbacks to promises
