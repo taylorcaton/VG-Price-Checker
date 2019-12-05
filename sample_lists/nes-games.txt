@@ -4,6 +4,7 @@ Adventures of Lolo 2
 Al Unser Jr. Turbo Racing
 Balloon Fight
 Baseball
+Baseball Stars 2
 Batman The Video Game
 Battletoads
 Battle of Olympus
@@ -43,7 +44,6 @@ Gyruss
 Hogan's Alley
 Ice Climbers [5-Screw]
 Ice Hockey
-Image Fight
 Iron Tank
 Jackal
 Jaws
@@ -61,11 +61,6 @@ Mach Rider
 Maniac Mansion
 Mendel Palace
 Nightshade
-Short Order/Eggsplode
-Space Shuttle Project
-Super Mario Bros 2
-Super Mario Bros 3
-Super Mario Bros Duck Hunt World Class Track Meet
 Mario Bros
 Mega Man 2
 Mega Man 3
@@ -79,11 +74,11 @@ Pinball [5-Screw]
 Pinball Quest
 Pinbot
 Pro Wrestling
+RBI Baseball
+RBI Baseball 2
 RBI Baseball 3
 RC Pro-AM
 Rad Racer
-RBI Baseball
-RBI Baseball 2
 River City Ransom
 Short Order Eggsplode
 Silver Surfer
@@ -91,9 +86,16 @@ Skate or Die
 Slalom [5-Screw]
 Soccer [5-Screw]
 Solomon's Key
+Short Order/Eggsplode
+Space Shuttle Project
 Stack Up
+Super Dodge Ball
+Super Mario Bros 2
+Super Mario Bros 3
+Super Mario Bros Duck Hunt World Class Track Meet
 Super Mario Bros [5-Screw]
 Super Mario Bros and Duck Hunt
+Super Spike Volleyball and World Cup Soccer
 Tecmo Super Bowl
 Tecmo Bowl
 Teenage Mutant Ninja Turtles
