@@ -13,13 +13,15 @@ function buildGameURL(game, consoleNumber) {
 }
 
 async function getPrice(game, CONSOLE_NUMBER) {
-  try {
-    const response = await fetch(buildGameURL(game, CONSOLE_NUMBER));
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.log(error);
-  }
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(buildGameURL(game, CONSOLE_NUMBER));
+      const json = await response.json();
+      resolve(json);
+    } catch (error) {
+      reject(error);
+    }
+  })
 }
 
 module.exports.buildGameURL = buildGameURL;
