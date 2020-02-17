@@ -1,7 +1,7 @@
 10 Yard Fight [5-Screw]
 3D World Runner
-Adventures in the Magic Kingdom
 Adventure Island 2
+Adventures in the Magic Kingdom
 Adventures of Lolo 2
 Al Unser Jr. Turbo Racing
 Attack of the Killer Tomatoes
@@ -9,8 +9,8 @@ Balloon Fight
 Baseball
 Baseball Stars 2
 Batman The Video Game
-Battletoads
 Battle of Olympus
+Battletoads
 Bionic Commando
 Blades of Steel
 Blaster Master
@@ -73,42 +73,43 @@ Kirby's Adventure
 Klax
 Krazy Kreatures
 Kung Fu
+Legend of Zelda
 Little Nemo
 Low G Man
 Mach Rider
 Maniac Mansion
-Mendel Palace
-Mutant Virus
-Nightshade
-Operation Wolf
 Mario Bros
 Mega Man 2
 Mega Man 3
 Mega Man 4
 Mega Man 6
+Mendel Palace
 Metal Gear
 Metroid [5-Screw]
 Mike Tyson's Punch Out
 Mission Impossible
+Mutant Virus
+Nightshade
 Ninja Gaiden 2
+Operation Wolf
 Pinball [5-Screw]
 Pinball Quest
 Pinbot
 Pro Wrestling
+Rad Racer
 RBI Baseball
 RBI Baseball 2
 RBI Baseball 3
 RC Pro-AM
-Rad Racer
 River City Ransom
 Robin Hood: Prince of Thieves
 RoboWarrior
 Rygar
-Short Order Eggsplode
-Silver Surfer
 Shadowgate
 Shatterhand
+Short Order Eggsplode
 Short Order/Eggsplode
+Silver Surfer
 Skate or Die
 Slalom [5-Screw]
 Soccer [5-Screw]
@@ -119,22 +120,22 @@ Stack Up
 Street Fighter 2010
 Strider
 Super Dodge Ball
+Super Mario Bros [5-Screw]
 Super Mario Bros 2
 Super Mario Bros 3
-Super Mario Bros Duck Hunt World Class Track Meet
-Super Mario Bros [5-Screw]
 Super Mario Bros and Duck Hunt
+Super Mario Bros Duck Hunt World Class Track Meet
 Super Spike Volleyball and World Cup Soccer
 Swords and Serpents
-Tecmo Super Bowl
 Tecmo Bowl
+Tecmo Super Bowl
 Teenage Mutant Ninja Turtles
 Teenage Mutant Ninja Turtles 2
 Tennis
 Tetris
 The Three Stooges
-Toobin
 To the Earth
+Toobin
 Track and Field 2
 Trog!
 Urban Champion [5-Screw]
@@ -144,6 +145,5 @@ Whomp 'Em
 Wild Gunman [5-Screw]
 Wizards and Warriors
 Wrecking Crew
-Legend of Zelda
-Zelda no Densetsu 1
 Zelda II The Adventures of Link
+Zelda no Densetsu 1
