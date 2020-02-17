@@ -1,7 +1,10 @@
 10 Yard Fight [5-Screw]
+3D World Runner
 Adventures in the Magic Kingdom
+Adventure Island 2
 Adventures of Lolo 2
 Al Unser Jr. Turbo Racing
+Attack of the Killer Tomatoes
 Balloon Fight
 Baseball
 Baseball Stars 2
@@ -11,16 +14,20 @@ Battle of Olympus
 Bionic Commando
 Blades of Steel
 Blaster Master
+Blue Marlin
 Boulder Dash
 Boy and his Blob
 Bubble Bobble
 Bucky O'Hare
 Bugs Bunny Crazy Castle
 California Games
+Captain Planet and the Planeteers
 Castlevania
-Castlevania 3
+Castlevania II Simon's Quest
+Castlevania III Dracula's Curse
 Chip and Dale Rescue Rangers
 Clu Clu Land
+Cobra Triangle
 Contra
 Crash n the Boys: Street Challenge
 Crystalis
@@ -30,15 +37,21 @@ Donkey Kong 3
 Donkey Kong Classics
 Donkey Kong Jr. [5-Screw]
 Donkey Kong Jr. Math [5-Screw]
+Double Dragon
 Double Dragon 2
 Dr. Mario
 Duck Hunt [5-Screw]
 Duck Tales
 Duck Tales 2
 Excitebike
+Faxanadu
 Felix the Cat
+Final Fantasy
 Fire'n Ice
+Friday the 13th
+Gauntlet
 Golf
+Goonies 2
 Guardian Legend
 Gumshoe
 Gun.Smoke
@@ -50,10 +63,12 @@ Ice Hockey
 Iron Tank
 Jackal
 Jaws
+Joe & Mac
 Jordan vs. Bird
 Joust
 Kickle Cubicle
 Kid Icarus [5-Screw]
+Kid Niki
 Kirby's Adventure
 Klax
 Krazy Kreatures
@@ -63,7 +78,9 @@ Low G Man
 Mach Rider
 Maniac Mansion
 Mendel Palace
+Mutant Virus
 Nightshade
+Operation Wolf
 Mario Bros
 Mega Man 2
 Mega Man 3
@@ -72,6 +89,7 @@ Mega Man 6
 Metal Gear
 Metroid
 Mike Tyson's Punch Out
+Mission Impossible
 Ninja Gaiden 2
 Pinball [5-Screw]
 Pinball Quest
@@ -83,8 +101,12 @@ RBI Baseball 3
 RC Pro-AM
 Rad Racer
 River City Ransom
+Robin Hood: Prince of Thieves
+RoboWarrior
+Rygar
 Short Order Eggsplode
 Silver Surfer
+Shadowgate
 Shatterhand
 Short Order/Eggsplode
 Skate or Die
@@ -92,7 +114,10 @@ Slalom [5-Screw]
 Soccer [5-Screw]
 Solomon's Key
 Space Shuttle Project
+Spy vs Spy
 Stack Up
+Street Fighter 2010
+Strider
 Super Dodge Ball
 Super Mario Bros 2
 Super Mario Bros 3
@@ -100,6 +125,7 @@ Super Mario Bros Duck Hunt World Class Track Meet
 Super Mario Bros [5-Screw]
 Super Mario Bros and Duck Hunt
 Super Spike Volleyball and World Cup Soccer
+Swords and Serpents
 Tecmo Super Bowl
 Tecmo Bowl
 Teenage Mutant Ninja Turtles
@@ -108,12 +134,15 @@ Tennis
 Tetris
 The Three Stooges
 Toobin
+To the Earth
 Track and Field 2
+Trog!
 Urban Champion [5-Screw]
 Volleyball [5-Screw]
 Wario's Woods
 Whomp 'Em
 Wild Gunman [5-Screw]
+Wizards and Warriors
 Wrecking Crew
 Legend of Zelda
 Zelda no Densetsu 1
