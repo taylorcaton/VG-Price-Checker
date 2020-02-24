@@ -30,7 +30,7 @@ node app.js TEXT_FILE -c CONSOLE_NAME -v
 
 - 32X, SCD, Dreamcast, GameGear, Genesis, SMS, Saturn
 
-### TODO
+### Roadmap
 
 - [x] NES and SNES Support
 - [x] Display totals
