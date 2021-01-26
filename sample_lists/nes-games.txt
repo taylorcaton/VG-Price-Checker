@@ -31,6 +31,7 @@ Cobra Triangle
 Contra
 Crash n the Boys: Street Challenge
 Crystalis
+Defender of the Crown
 Deja Vu
 Donkey Kong [5-Screw]
 Donkey Kong 3
@@ -63,6 +64,8 @@ Ice Hockey
 Iron Tank
 Jackal
 Jaws
+Jeopardy
+Jeopardy 25th Anniversary Edition
 Joe & Mac
 Jordan vs. Bird
 Joust
@@ -92,6 +95,7 @@ Mutant Virus
 Nightshade
 Ninja Gaiden 2
 Operation Wolf
+Palamedes
 Pinball [5-Screw]
 Pinball Quest
 Pinbot
@@ -101,6 +105,7 @@ RBI Baseball
 RBI Baseball 2
 RBI Baseball 3
 RC Pro-AM
+Remote Control
 River City Ransom
 Robin Hood: Prince of Thieves
 Robo Warrior
@@ -126,6 +131,7 @@ Super Mario Bros and Duck Hunt
 Super Mario Bros Duck Hunt World Class Track Meet
 Super Spike Volleyball and World Cup Soccer
 Swords and Serpents
+Talking Super Jeopardy
 Tecmo Bowl
 Tecmo Super Bowl
 Teenage Mutant Ninja Turtles
@@ -140,6 +146,9 @@ Trog!
 Urban Champion [5-Screw]
 Volleyball [5-Screw]
 Wario's Woods
+Wheel of Fortune
+Wheel of Fortune Family Edition
+Wheel of Fortune featuring Vanna White
 Whomp 'Em
 Wild Gunman [5-Screw]
 Wizards and Warriors
