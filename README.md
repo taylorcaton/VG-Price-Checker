@@ -1,8 +1,6 @@
-# Video Game Price-Checker
+# DEPRECATED Video Game Price-Checker
 
-## Deprecation Notice
-
-THIS SCRAPER NO LONGER WORKS
+THIS SCRAPER SOURCE IS NO LONGER AVAILABLE
 
 ---
 
