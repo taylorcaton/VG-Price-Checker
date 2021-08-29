@@ -1,5 +1,11 @@
 # Video Game Price-Checker
 
+## Deprecation Notice
+
+THIS SCRAPER NO LONGER WORKS
+
+---
+
 Takes a list of games from a text file and creates a csv with all of their current prices. See examples in sample_lists folder.
 
 (requires node >= 8)
